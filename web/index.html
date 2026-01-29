@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Commute Review</title>
+  <meta name="theme-color" content="#111111" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">CR</div>
+      <div>
+        <div class="title">Commute Review</div>
+        <div class="sub">通勤碎片化複習（離線可用）</div>
+      </div>
+    </div>
+    <button id="btnSettings" class="btn ghost" title="設定">⚙️</button>
+  </header>
+
+  <main class="container">
+    <section id="home" class="card">
+      <h2>今天要刷多少？</h2>
+      <div class="row">
+        <div class="kpi">
+          <div class="kpiLabel">今日完成</div>
+          <div class="kpiValue"><span id="doneToday">0</span> / <span id="goalToday">30</span></div>
+        </div>
+        <div class="kpi">
+          <div class="kpiLabel">待複習（到期）</div>
+          <div class="kpiValue"><span id="dueCount">0</span></div>
+        </div>
+        <div class="kpi">
+          <div class="kpiLabel">新卡</div>
+          <div class="kpiValue"><span id="newCount">0</span></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="btnStart" class="btn primary">開始一輪（通勤模式）</button>
+        <button id="btnBrowse" class="btn">按主題瀏覽</button>
+      </div>
+
+      <div class="hint">
+        小提醒：把這個頁面「加入主畫面」後，就像 App 一樣離線可用。
+      </div>
+    </section>
+
+    <section id="session" class="card hidden">
+      <div class="sessionTop">
+        <div>
+          <div class="sessionTitle" id="sessionTitle">通勤模式</div>
+          <div class="sessionMeta"><span id="sessionProgress">0/0</span> · <span id="sessionTopic">—</span></div>
+        </div>
+        <button id="btnExit" class="btn ghost">✕</button>
+      </div>
+
+      <div id="prompt" class="prompt"></div>
+      <div id="answer" class="answer hidden"></div>
+
+      <div class="row">
+        <button id="btnShow" class="btn">看答案</button>
+      </div>
+
+      <div id="gradeRow" class="row hidden">
+        <button data-grade="again" class="btn danger">忘了</button>
+        <button data-grade="hard" class="btn">有點難</button>
+        <button data-grade="good" class="btn primary">OK</button>
+        <button data-grade="easy" class="btn">很簡單</button>
+      </div>
+    </section>
+
+    <section id="browse" class="card hidden">
+      <div class="sessionTop">
+        <div>
+          <div class="sessionTitle">按主題瀏覽</div>
+          <div class="sessionMeta">你也可以在通勤時挑一個主題刷</div>
+        </div>
+        <button id="btnBackHome" class="btn ghost">✕</button>
+      </div>
+
+      <div class="row">
+        <input id="topicFilter" class="input" placeholder="搜尋主題或關鍵字…" />
+      </div>
+      <div id="topicList" class="topicList"></div>
+    </section>
+
+    <section id="settings" class="card hidden">
+      <div class="sessionTop">
+        <div>
+          <div class="sessionTitle">設定</div>
+          <div class="sessionMeta">本機儲存，不上雲</div>
+        </div>
+        <button id="btnCloseSettings" class="btn ghost">✕</button>
+      </div>
+
+      <div class="grid2">
+        <label class="field">
+          <div class="label">每日目標（張）</div>
+          <input id="setGoal" class="input" type="number" min="5" max="200" step="5" />
+        </label>
+
+        <label class="field">
+          <div class="label">通勤模式每輪（張）</div>
+          <input id="setBatch" class="input" type="number" min="5" max="50" step="5" />
+        </label>
+      </div>
+
+      <label class="field">
+        <div class="label">新卡比例（0~1）</div>
+        <input id="setNewRatio" class="input" type="number" min="0" max="1" step="0.05" />
+        <div class="help">例如 0.3 代表每輪大約 30% 會抽新卡。</div>
+      </label>
+
+      <div class="row">
+        <button id="btnResetProgress" class="btn danger">重置進度（不刪卡片）</button>
+        <button id="btnExport" class="btn">匯出進度 JSON</button>
+        <label class="btn">
+          匯入進度 JSON
+          <input id="importFile" type="file" accept="application/json" hidden />
+        </label>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span id="footerMeta">—</span>
+  </footer>
+
+<script src="./app.js"></script>
+</body>
+</html>
