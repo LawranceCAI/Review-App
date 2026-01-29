@@ -146,13 +146,15 @@ def build_cards(docx_path: Path):
 
     flush_card()
 
-    meta = {
-        "generated_at": datetime.datetime.now().isoformat(timespec="seconds"),
-        "source_file": docx_path.name,
+      meta = {
+        "generated_at": ...,
+        "source_file": ...,
         "card_count": len(cards),
-        "topics": sorted({c["topic"] for c in cards}),
-        "types": ["direction"]
-    }
+        "topics": ...,
+        "types": ["direction"],
+        "schema": "direction-v1"
+      }
+
     return {"meta": meta, "cards": cards}
 
 def main():
